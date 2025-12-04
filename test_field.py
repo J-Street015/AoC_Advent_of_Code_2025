@@ -19,9 +19,18 @@ for key, value in num_dict.items():
 
 print(num_list_updated)
 
-# find the two highest digits in the list
+# The insert() method lets you add an item at a specific index in the list.
+# As you know, list elements are ordered, starting with index 0 for the first item.
+# The insert() method takes two parameters: the index of the new element to be added and the value of the element.
 
-for i, num in enumerate(num_list_updated):
-    num1 = (num, i)
-    print(num1)
+two_highest = []
+for i in range(2):
+    # find highest number:
+    highest_number, index_highest = max(num_list_updated) ,num_list_updated.index(max(num_list_updated))
+    print(highest_number, index_highest)
+    two_highest.insert(index_highest, highest_number)
+    # remove the highest number from the list
+    num_list_updated.pop(index_highest)
 
+    print(num_list_updated)
+print(two_highest)
