@@ -1,36 +1,78 @@
-
-
-
-
 # turn each large number in a list itself and then do the pop method
 
 
-num = 2712233521522212239633525221424223292522332923342263323223226223332531222232333293222213262324223122
+# num = []
+# with open("input_day3") as f:
+#     for line in f.readlines():
+#
+#         num.append(int(line.rstrip("\n")))
 
-# make list from the numbers
+# print(num)
+
+# turn number into string and then into list items
+
+def find_number(num):
+    num_list = list(str(num))
+    # print(num_list)
+
+    num_dict = dict.fromkeys(num_list)
+    # print(num_dict)
+    value = 1
+
+    for key in num_dict:
+        value +=1
+        num_dict[key] = int(key)
+
+
+    # print(num_dict)
+    # print(list(num_dict.items()))
+
+    num_list_new = list(num_dict.items())
+    highest_list = []
+    for i in range(2):
+        highest = max(num_list_new)
+        # print(highest)
+        highest_list.append(highest)
+        num_list_new.pop(num_list_new.index(highest))
+        # print(num_list_new)
+    dict_highest = (dict(highest_list))
+
+    highest_number = []
+
+    for key, value in dict_highest.items():
+        highest_number.append(value)
+    highest_number = ''.join(map(str, highest_number))
+    return highest_number
+
+
+num =22122386335252214242232925223327233422
 num_list = list(str(num))
-# create a dictionary from the list of numbers with the number strings as keys.
-# this removes the duplicated digits, but also keeps the order of numbers.
-num_dict  = dict.fromkeys(list(str(num)))
 
-num_list_updated = []
-for key, value in num_dict.items():
-    num_list_updated.append(int(key))
 
-print(num_list_updated)
+print(num_list)
+numbers = []
+for number in num_list:
+    numbers.append(int(number))
 
-# The insert() method lets you add an item at a specific index in the list.
-# As you know, list elements are ordered, starting with index 0 for the first item.
-# The insert() method takes two parameters: the index of the new element to be added and the value of the element.
+# print(numbers)
 
-two_highest = []
+num_saved = int()
+
 for i in range(2):
-    # find highest number:
-    highest_number, index_highest = max(num_list_updated) ,num_list_updated.index(max(num_list_updated))
-    print(highest_number, index_highest)
-    two_highest.insert(index_highest, highest_number)
-    # remove the highest number from the list
-    num_list_updated.pop(index_highest)
+    max_num = max(numbers)
+    print(max(numbers), numbers.index(max_num))
+    numbers.pop(numbers.index(max_num))
+    print(numbers)
 
-    print(num_list_updated)
-print(two_highest)
+# add the elements to a dictionary and then sort and get the
+# print(keys)
+
+my_dict = {'b': 3, 'a': 1, 'c': 2}
+
+# Sort by values (ascending)
+sorted_by_values = dict(sorted(my_dict.items(), key=lambda item: item[1]))
+# sorted_by_values is {'a': 1, 'c': 2, 'b': 3}
+
+# Sort by values (descending)
+sorted_by_values_desc = dict(sorted(my_dict.items(), key=lambda item: item[1], reverse=True))
+# sorted_by_values_desc is {'b': 3, 'c': 2, 'a': 1}
