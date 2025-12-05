@@ -1,11 +1,11 @@
 # turn each large number in a list itself and then do the pop method
 
 
-# num = []
-# with open("input_day3") as f:
-#     for line in f.readlines():
-#
-#         num.append(int(line.rstrip("\n")))
+num = []
+with open("input_day3") as f:
+    for line in f.readlines():
+
+        num.append(int(line.rstrip("\n")))
 
 # print(num)
 
@@ -45,34 +45,53 @@ def find_number(num):
     return highest_number
 
 
-num =22122386335252214242232925223327233422
-num_list = list(str(num))
+
+def get_highest(num):
+    num_list = list(str(num))
 
 
-print(num_list)
-numbers = []
-for number in num_list:
-    numbers.append(int(number))
+    # print(num_list)
+    numbers = []
+    for number in num_list:
+        numbers.append(int(number))
 
-# print(numbers)
+    # print(numbers)
 
-num_saved = int()
 
-for i in range(2):
-    max_num = max(numbers)
-    print(max(numbers), numbers.index(max_num))
-    numbers.pop(numbers.index(max_num))
-    print(numbers)
 
-# add the elements to a dictionary and then sort and get the
-# print(keys)
+    # create an empty dictionary to store the
+    # numbers and their index
+    number_dict = {"a": "none", "b":'none'}
+    max_index = 0
+    for i in range(2):
+        # get highest number
+        max_num = max(numbers)
+        # get the index of the highest number
+        max_num_index = numbers.index(max_num)
+        # add if statement to split the numbers
+        # think about the series of comparisons
+        if max_index > max_num_index:
+            number_dict[max_num_index]= max_num
+            numbers.pop(numbers.index(max_num))
+        elif max_index == max_num_index
+        # print(numbers)
+        # print(number_dict)
 
-my_dict = {'b': 3, 'a': 1, 'c': 2}
+    ### Sort the number dictionary by key which is the index
+    sorted_dict = dict(sorted(number_dict.items(), key=lambda item: item[0]))
+    # print(sorted_dict)
 
-# Sort by values (ascending)
-sorted_by_values = dict(sorted(my_dict.items(), key=lambda item: item[1]))
-# sorted_by_values is {'a': 1, 'c': 2, 'b': 3}
+    highest_number = []
+    # now add the values from the dict to a list
+    for key, value in sorted_dict.items():
+        # print(value)
+        highest_number.append(value)
+    highest_number = ''.join(map(str, highest_number))
+    return highest_number
 
-# Sort by values (descending)
-sorted_by_values_desc = dict(sorted(my_dict.items(), key=lambda item: item[1], reverse=True))
-# sorted_by_values_desc is {'b': 3, 'c': 2, 'a': 1}
+list_of_numbers= []
+for n in num:
+    high = get_highest(n)
+    print(high)
+    list_of_numbers.append(int(high))
+print(sum(list_of_numbers))
