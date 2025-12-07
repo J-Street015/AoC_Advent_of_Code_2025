@@ -1,12 +1,8 @@
-# Python program to implement
-# the above approach
+# read the input and add the input to a list of numbers.
 num_list = []
 with open("input_day3") as f:
     for line in f.readlines():
         num_list.append(int(line.rstrip("\n")))
-
-for i in num_list:
-    print(i)
 
 
 def maxnumber(n, k):
@@ -38,17 +34,9 @@ def maxnumber(n, k):
     return ans;
 
 
-n = 2712233521522212239633525221424223292522332923342263323223226223332531222232333293222213262324223122
 k = 88
-print(maxnumber(n, k))
+updated_num_list = []
+for n in num_list:
+    updated_num_list.append(maxnumber(n, k))
 
-
-
-
-
-
-
-
-
-
-
+print(sum(updated_num_list))
