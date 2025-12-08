@@ -7,7 +7,7 @@ with open("input_day3") as f:
 
         num.append(int(line.rstrip("\n")))
 
-# print(num)
+print(num)
 
 # turn number into string and then into list items
 
@@ -61,19 +61,20 @@ def get_highest(num):
 
     # create an empty dictionary to store the
     # numbers and their index
-    number_dict = {"a": "none", "b":'none'}
-    max_index = 0
-    for i in range(2):
+    number_dict = {}
+
+
+    while len(number_dict) < 2:
         # get highest number
         max_num = max(numbers)
         # get the index of the highest number
         max_num_index = numbers.index(max_num)
-        # add if statement to split the numbers
-        # think about the series of comparisons
-        if max_index > max_num_index:
-            number_dict[max_num_index]= max_num
-            numbers.pop(numbers.index(max_num))
-        elif max_index == max_num_index
+
+        number_dict[max_num_index]= max_num
+        # The pop function is wrong here,
+        numbers.pop(numbers.index(max_num))
+
+
         # print(numbers)
         # print(number_dict)
 
