@@ -1,50 +1,83 @@
 import numpy
 import scipy
 
-grid_list = []
+import numpy as np
+import scipy
+ranges = []
+ids = []
 
-# read input and each line becomes a list so it can be turned into an array.
-with open("input_day4.txt") as f:
-    for line in f:
-        grid_list.append(list(line.rstrip("\n")))
+with open("input_day5.txt") as f:
+    for line in f.readlines():
+        l = line.rstrip('\n')
+        if "-" in l:
+            # print(f"line: {l} is a range")
+            ranges.append(l)
+            # for part 2 of the challenge code below not needed.
+        # else:
+        #     # print(f'line: {l} is an ID')
+        #     ids.append(l)
 
 
-# replace the placeholder and @ Paper roll with 0, 1 for array calculation.
-new_list = []
-new_element = []
-for element in grid_list:
-    for i in element:
-        if i == ".":
-            i = 0
-            new_element.append(i)
-        elif i == "@":
-            i = 1
-            new_element.append(i)
-    new_list.append(new_element)
-    new_element=[]
+# create a list with range
+list_of_ranges = []
+for r in ranges:
+    n1 = int(r.split("-")[0])
+    n2 = int(r.split("-")[1])
+    for i in range(n1, n2+1):
+        list_of_ranges.append(i)
+# print(list_of_ranges)
 
-boundaries = numpy.array(new_list)
-len_element= 0
-row_nums= 0
-for i in boundaries:
-    len_element= len(i)
-    row_nums +=1
+# ranges_array = np.array(list_of_ranges, dtype=object)object
+# print(ranges_array)
+#
 
-# get the total number of elements in array
-number_of_all_elements = (len_element * row_nums)
+# turn list of ranges into
+# turn the range lists into real ranges, but doing it in a for loop
+# breaks the memory of the machine.
+# fresh_list = []
+# for r in list_of_ranges:
+#         id_range = range(r[0], r[1] + 1)
+#         for id in id_range:
+#             fresh_list.append(id)
+#
 
-total_count= [] # empty list to store the count from every round
-roll_count = (len_element * row_nums) # adds the max number of elements which can be removed from the array
-while roll_count > 0: # while loop to keep track of the count from each repetition.
-    # If 0, this means no more elements can be removed
-    counts = scipy.signal.convolve2d(boundaries, numpy.ones((3,3)), mode="same")
-    # print(counts)
-    c = numpy.zeros_like(counts)
-    c[(boundaries > 0) & (counts<5)] = 1
-    # print(c)
-    roll_count = sum(c[c ==1])
-    boundaries[(boundaries ==1) & (c==1) ] = 0
-    total_count.append(roll_count)
-print(sum(total_count))
 
+#
+# fresh_list_clean = []
+# for element in fresh_list:
+#     print(element)
+#     for i in element:
+#         if len(element) > 0:
+#             fresh_list_clean.append(i)
+#
+# fresh = []
+# for f in fresh_list:
+#     fresh.append(f[0])
+#
+#
+#
+# rotten= []
+# # for n in ids_int:
+# #     print(n)
+# #     for element in ranges_array:
+# #         if n in element:
+# #             # print(f"found {n} in {element}")
+# #             fresh.append(n)
+# #         else:
+# #             rotten.append(n)
+# #             # ids_int.pop(ids_int.index(n))
+#
+# # remove duplicated elements from the list fresh
+#
+# fresh_dict= dict.fromkeys(fresh_list_clean)
+# fresh_no_dup=[]
+# for k,v in fresh_dict.items():
+#     fresh_no_dup.append(k)
+# #
+# # rotten_dict= dict.fromkeys(fresh)
+# # rotten_no_dup=[]
+# # for k,v in rotten_dict.items():
+# #     rotten_no_dup.append(k)
+# #
+# print(len(fresh_no_dup))
 

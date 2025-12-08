@@ -33,6 +33,7 @@ for r in ranges:
 # ranges_array = np.array(list_of_ranges, dtype=object)object
 # print(ranges_array)
 #
+# append item to fresh list if id is found in the range the numbers create.
 fresh_list = []
 for r in list_of_ranges:
     fresh_list.append([i for i in ids_int if i in range(r[0], r[1]+1)])
