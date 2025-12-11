@@ -1,5 +1,3 @@
-import numpy
-import scipy
 
 import numpy as np
 import scipy
@@ -19,13 +17,13 @@ with open("input_day5.txt") as f:
 
 
 # create a list with range
-list_of_ranges = []
+
 for r in ranges:
     n1 = int(r.split("-")[0])
     n2 = int(r.split("-")[1])
-    for i in range(n1, n2+1):
-        list_of_ranges.append(i)
+    print(n1, n2)
 # print(list_of_ranges)
+
 
 # ranges_array = np.array(list_of_ranges, dtype=object)object
 # print(ranges_array)
