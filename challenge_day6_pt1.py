@@ -24,5 +24,12 @@ for i in list_of_elements:
 
 
 for list in test_list2:
-    for l in list:
-        print(list[list.index(l)])
+    print(list[1])
+    print(len(test_list2))
+
+
+
+# if element == '+' or element == "*":
+#     print(f"element {element} is a operator ")
+# else:
+#     print(f"element {element} is a number ")
