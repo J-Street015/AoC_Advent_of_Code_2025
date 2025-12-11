@@ -1,35 +1,31 @@
-dat = []
-with open("d6_test") as f:
-    line = f.readlines()
-    for l in line:
-        l_split = l.rstrip("\n").split("\t")
-        dat.append(l_split)
+# Code is maybe not good looking but it works.
 
+import pandas as pd
 
+dat = pd.read_csv("d6_input", sep='\s+',header=None)
 
-with open('d6_test','r') as f:
-    test=[x.strip().split('\t') for x in f]
+dat = pd.DataFrame(dat)
 
+num = 0
+num_sum = []
+for i in dat:
+    # print(dat[i]) # prints columns 1 by 1
+    test = []
+    for i in dat[i]:
+        test.append(i)
+        if "+" in test:
+            test.pop(len(test) -1)
+            for i in test:
+                num += int(i)
+            num_sum.append(num)
+            num = 0
 
-import csv
-list_of_elements = []
-with open("d6_test", 'r') as f:
-    for i in csv.reader(f, delimiter=" "):
-        list_of_elements.append(i)
+        elif "*" in test:
+            test.pop(len(test) -1)
+            num = num +1
+            for i in test:
+                num *= int(i)
+            num_sum.append(num)
+            num = 0
+print(sum(num_sum))
 
-test_list2 = []
-for i in list_of_elements:
-    i = [x for x in i if x]
-    test_list2.append(i)
-
-
-for list in test_list2:
-    print(list[1])
-    print(len(test_list2))
-
-
-
-# if element == '+' or element == "*":
-#     print(f"element {element} is a operator ")
-# else:
-#     print(f"element {element} is a number ")
