@@ -18,7 +18,7 @@ for i in range(len(df.columns)):
 
             sub_list.append(d)
             # print(sub_list)
-            test_list.append(sub_list)
+        test_list.append(sub_list)
 print(test_list)
 
-
+print(pd.DataFrame(test_list))
