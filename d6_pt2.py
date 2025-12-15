@@ -1,51 +1,43 @@
 # Code is maybe not good looking but it works.
-import array
 
-import pandas as pd
-import array
-dat = pd.read_csv("d6_test", sep='\s+', header= None)
+number_map = []
+with open("d6_test") as f:
+    for line in f.readlines():
+        number_map.append(line.rstrip("\n"))
+# print(number_map)
 
-df = pd.DataFrame(dat)
+from math import prod
+from typing import List
 
-############## Keep and dont touch for now ###################
-# print(len(df.columns))
-# test_list = []
-# for i in range(len(df.columns)):
-#     for l in range(len(df)):
-#         num_string = df[i][l]
-#         sub_list = []
-#         for d in num_string:
-#
-#
-#             sub_list.append(d)
-#             # print(sub_list)
-#         test_list.append(sub_list)
-# print(test_list)
-#
-# print(pd.DataFrame(test_list))
+def part_two(data: List[str]) -> int:
+    numbers = data[:-1] # Keep as strings
+    print(numbers)
+    print(data)
+    operators = data[-1].split()   # Last line contains operations
 
-############## Keep and dont touch for now ###################
+    total = 0
+    digits = []
 
+    # while numbers are not at position -1, they get added to numbers, if loop reaches pos -1 instead
+    # of adding the code sums or multiplies the numbers collected so far, and resets the number list
 
-# # iterate over rows
-# for i, row in df.iterrows():
-#     print(i, row)
-#     print()
+    # # Iterate column-wise from right to left
+    for i in range(len(numbers[0]) - 1, -2, -1):
+        # If the column is empty (all spaces) or end of row
+        if all(problem[i] == ' ' for problem in numbers) or i == -1:
+            if numbers:
+                op = operators.pop()
+                if op == '+':
+                    total += sum(digits)
+                elif op == '*':
+                    total += prod(digits)
+                digits = []
+        else:
+            # Build the column as a string
+            column = ''.join(problem[i] for problem in numbers).strip()
+            if column:  # Ignore empty columns
+                digits.append(int(column))
 
-# print(df[0])
+    return total
 
-# Iterate over columns:
-
-for label, value in df.items():
-    # print(value)
-    top_list = []
-    for element in value:
-        new_list = []
-        top_list.append(new_list)
-        for i in element:
-            new_list.append(i)
-
-        # print(new_list)
-    # print(top_list)
-    for i in top_list:
-        print(i)
+print(part_two(number_map))
