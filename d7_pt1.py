@@ -14,9 +14,29 @@ for i in range(len(data[0])):
 test_dat = [['a', 'e','d'], ['c', 'g', 'e']]
 
 
-for line in test_dat:
-    if "e" in line:
-        print(line.index('e'))
-        print(line.index('e') -1, line.index('e') +1)
-        if len(line) == line.index("e") + 1:
-            print(f'index out of range, {line}' )
+# get the start position:
+start_pos = [data[0].index("S")]
+
+print(start_pos)
+
+
+split_pos = [start_pos]
+
+for line in data:
+    if "^" in line:
+        if line.index("^") in start_pos:
+            print(f'first split at line {line}')
+            lower = line.index('^') -1
+            upper = line.index('^') + 1
+            start_pos = [lower, upper]
+            print(start_pos)
+
+
+
+
+        # print(line.index('^'))
+        # print(line.index('^') -1, line.index('^') +1)
+        # if len(line) == line.index("^") + 1:
+        #     print(f'index out of range, {line}' )
+
+
