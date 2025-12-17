@@ -11,11 +11,12 @@ for i in range(len(data[0])):
 
 
 
-test_dat = ["a", "b", "c"]
+test_dat = [['a', 'e','d'], ['c', 'g', 'e']]
 
-for line in data:
-    for i in range(len(line)):
-        print(line[i])
-        if line[i] == "^":
-            print(line.index(line[i -1]), line.index(line[i +1]))
 
+for line in test_dat:
+    if "e" in line:
+        print(line.index('e'))
+        print(line.index('e') -1, line.index('e') +1)
+        if len(line) == line.index("e") + 1:
+            print(f'index out of range, {line}' )
