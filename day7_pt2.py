@@ -1,42 +1,43 @@
 # read in the data
-from unittest.mock import right
+
+from numpy.ma.core import left_shift
 
 data = []
 with open("d7_input") as f:
     for line in f.readlines():
         data.append(line.rstrip("\n"))
 
+# grid = [list(line) for line in open("day7.txt", "r").read().splitlines()]
+grid = data
+rows = len(grid)
+cols = len(grid[0])
 
-# define start position
-beam_pos = set([i for i, x in enumerate(data[0]) if x == "S"]) # set the start position as the first split position
-test = []
-split_count = 0
-for line in data:
-    idxs = [i for i, x in enumerate(line) if x == "^"] # records all instances of caret in line and their indices.
-    beam_pos = list(set(beam_pos)) # convert beam position to set to avoid duplicates in case the beam splits into same postion
-    temp = []
+start_col = grid[0].index("S")
 
-    # go through all positions of the splitter and check if splitter is at the beam position
-    for i in idxs:
-        if i in beam_pos:
-            split_count += 1 # update split if a splitter is in beam position
-            left_idx = i -1 #get left beam
-            right_idx = i +1 #get right beam
-            beam_pos.append(left_idx)
-            beam_pos.append(right_idx)
-            beam_pos.pop(beam_pos.index(i))
-
-            temp.append(left_idx)
-            temp.append(right_idx)
-    if len(temp) > 0:
-        test.append(temp)
-# print(split_count)
-print(test)
+memo = {}
 
 
-test_count = 0
-for i  in test:
-    print(len(i))
-    test_count += len(i)
+def traverse(row, col):
+    if row < 0 or row >= rows or col < 0 or col >= cols:
+        return 1
 
-print(test_count)
+    if (row, col) in memo:
+        return memo[(row, col)]
+
+    current_cell = grid[row][col]
+
+    if current_cell == "^":
+        left_path = traverse(row + 1, col - 1)
+        right_path = traverse(row + 1, col + 1)
+        result = left_path + right_path
+    elif current_cell == ".":
+        result = traverse(row + 1, col)
+    else:
+        result = 0
+
+    memo[(row, col)] = result
+    return result
+
+
+total_paths = traverse(1, start_col)
+print(total_paths)
