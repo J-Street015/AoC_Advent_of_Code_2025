@@ -1,42 +1,36 @@
 # read in the data
-from unittest.mock import right
+
 
 data = []
-with open("d7_input") as f:
+with open("d7_test") as f:
     for line in f.readlines():
         data.append(line.rstrip("\n"))
 
+position_map = []
 
 # define start position
 beam_pos = set([i for i, x in enumerate(data[0]) if x == "S"]) # set the start position as the first split position
-test = []
+
 split_count = 0
 for line in data:
     idxs = [i for i, x in enumerate(line) if x == "^"] # records all instances of caret in line and their indices.
-    beam_pos = list(set(beam_pos)) # convert beam position to set to avoid duplicates in case the beam splits into same postion
-    temp = []
+    beam_pos = list(beam_pos) # convert beam position to set to avoid duplicates in case the beam splits into same postion
+    position_map.append(sorted(beam_pos))
 
     # go through all positions of the splitter and check if splitter is at the beam position
     for i in idxs:
         if i in beam_pos:
-            split_count += 1 # update split if a splitter is in beam position
-            left_idx = i -1 #get left beam
-            right_idx = i +1 #get right beam
-            beam_pos.append(left_idx)
+            # split_count += 1 # update split if a splitter is in beam position
+            idx = i -1  # left beam
+            right_idx = i +1 #right beam
+            beam_pos.append(idx)
             beam_pos.append(right_idx)
             beam_pos.pop(beam_pos.index(i))
 
-            temp.append(left_idx)
-            temp.append(right_idx)
-    if len(temp) > 0:
-        test.append(temp)
-# print(split_count)
-print(test)
+import itertools
+# position_map.sort()
+cleaned_pos = list(k for k,_ in itertools.groupby(position_map))
 
+for i in cleaned_pos:
+    print(i)
 
-test_count = 0
-for i  in test:
-    print(len(i))
-    test_count += len(i)
-
-print(test_count)
