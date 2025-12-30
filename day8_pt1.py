@@ -51,7 +51,7 @@ indices= []
 for i in results:
     # print(i["indices"])
     indices.append(list(i['indices']))
-print(indices)
+# print(indices) # use for test data only
 
 pooled = [set(subList) for subList in indices]
 merging = True
