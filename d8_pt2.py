@@ -1,11 +1,12 @@
 import math
 from typing import List
-
 import pandas as pd
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 import heapq # For efficient top-N selection
 
+# used help from https://yordi.me/advent-of-code-2025-day-8/
+# for part2
 
 dat = pd.read_csv('d8_full', sep=",", header=None, index_col=False)
 dat = dat.rename(columns={0:"X", 1:"Y", 2:"Z"})
