@@ -3,12 +3,10 @@
 ids = []
 with open("input_day2.txt") as f:
     ids.append(f.readlines())
-#
-# print(ids[0][0])
 
 id_ranges = ids[0][0]
 result = id_ranges.split(",")
-# print(result)
+
 
 num_list_part1 = []
 
@@ -21,7 +19,6 @@ for i in result:
     # first and second part, if they match you got a hit. Help by stack overflow
     for i in test:
         firstpart, secondpart = str(i)[:len(str(i)) // 2], str(i)[len(str(i)) // 2:]
-        # print(firstpart, secondpart)
         if firstpart == secondpart:
             num_list_part1.append(int(firstpart + secondpart))
 print(sum(num_list_part1))
@@ -41,8 +38,6 @@ for i in result:
         # Check for repeating pattern using string concatenation
         res = (str(t) + str(t)).find(str(t), 1) != len(str(t))
         if res:
-            # print(int(t))
             num_list_part2.append(int(t))
-
 
 print(sum(num_list_part2))
