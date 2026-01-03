@@ -1,4 +1,4 @@
-# read in the data
+# AoC day 7 part1. Code works.
 data = []
 with open("d7_input") as f:
     for line in f.readlines():
