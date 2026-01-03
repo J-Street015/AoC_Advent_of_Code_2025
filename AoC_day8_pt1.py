@@ -1,5 +1,5 @@
-import math
 
+import math
 import pandas as pd
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
@@ -12,15 +12,12 @@ dat = dat.rename(columns={0:"X", 1:"Y", 2:"Z"})
 
 # Array of points (each row is a 3D point)
 points_array_dat = np.array(dat)
-print(points_array_dat)
-
 # Sample 3D Coordinates (N points)
 
 points = points_array_dat
 # 1. Calculate all pairwise distances
 # pdist gives a condensed distance matrix (upper triangle)
 condensed_distances = pdist(points)
-
 # 2. Squareform converts to a full matrix (optional, but useful for indexing)
 dist_matrix = squareform(condensed_distances)
 
