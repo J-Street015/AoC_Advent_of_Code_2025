@@ -15,6 +15,7 @@ points_array_dat = np.array(dat)
 # Sample 3D Coordinates (N points)
 
 points = points_array_dat
+
 # 1. Calculate all pairwise distances
 # pdist gives a condensed distance matrix (upper triangle)
 condensed_distances = pdist(points)
